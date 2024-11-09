@@ -1,0 +1,56 @@
+﻿@model IEnumerable<MvcSocial.Models.User>
+
+@{
+    ViewData["Title"] = Localizer["Title"];
+}
+
+<h1>@Localizer["Title"]</h1>
+
+<form method="post" asp-action="Add">
+    <input class="form-text" type="text" name="login"/>
+    <input type="submit" value="@Localizer["Add Friend"]" class="btn btn-danger" />
+</form>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Login)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                    <a asp-action="Del" asp-route-id="@item.Login">@Localizer["Delete"]</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<div>
+    <form method="post" asp-action="Export">
+        <input type="submit" value="@Localizer["Export"]" class="btn btn-danger" />
+    </form>
+    
+    <form method="post" enctype="multipart/form-data" asp-action="Import">
+        <div class="form-group">
+            <div class="col-md-10">
+                <p>@Localizer["Import Friends"]</p>
+                <input class="form-control" name="file" type="file" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input class="btn btn-success" type="submit" value="@Localizer["Import"]" />
+            </div>
+        </div>
+    </form>
+</div>
+
+
