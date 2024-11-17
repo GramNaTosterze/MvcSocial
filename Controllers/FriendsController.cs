@@ -28,7 +28,7 @@ public class FriendsController : Controller
 
         public IActionResult List()
         {
-            return Json(CurrentUser().Friends);
+            return Json(Json(CurrentUser().Friends.Select(f => f.Login)));
         }
         
         
